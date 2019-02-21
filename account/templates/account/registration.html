@@ -1,0 +1,22 @@
+{% extends 'server/base.html' %}
+{% load static %}
+{% block page_staticfiles %}
+    <link rel="stylesheet" href="{% static 'accounts/css/account.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+        {% if form.errors %}
+        <div class="alert alert-danger">{{ form.errors }}</div>
+        {% endif %}
+            <form action="" method="post" class="registration col-xs-12">{% csrf_token %}
+                {% for filed in form %}
+                    <div class="col-xs-6"><label for="{{ filed.name }}" class="label">{{ filed.label }}</label>{{ filed }}</div>
+                {% endfor %}
+                <input type="submit" value="Регистрация">
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'server/base.html' %}
+{% load static %}
+{% block page_staticfiles%}
+    <link rel="stylesheet" href="{% static 'products/css/catalog.css' %}">
+{% endblock %}
+{% block title%}
+    {{ product.name }}
+{% endblock %}
+{% block content %}
+    <h3>{{ product.name }} - <span>{{ product.price}}</span></h3>
+    {% if product.image %}
+        <img class="media-object" width="200em" src="{{ product.image.url }}" style="width: 500px;height: 500px" alt="{{ product.name }}">
+    {% endif %}
+    <p>{{ product.description}}</p>
+{% endblock %}

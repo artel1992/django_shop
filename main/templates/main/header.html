@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+            <div class="header col-xs-12">
+                <h3 class="col-xs-3">Интернет-магазин</h3>
+                <nav class="nav nav-pills navbar-right">
+                    <li {% if menu_item.link_name in path %}class="active"{% elif path == '/' and menu_item.link_name == 'home' %}class="active"{% endif %}>
+                        <a  href="{% url 'main:home'%}">Главная</a>
+                    </li>
+                <li {% if menu_item.link_name in path %}class="active"{% elif path == '/' and menu_item.link_name == 'home' %}class="active"{% endif %}>
+                        <a  href="{% url 'main:about' %}">About</a>
+                    </li>
+                <li {% if menu_item.link_name in path %}class="active"{% elif path == '/' and menu_item.link_name == 'home' %}class="active"{% endif %}>
+                        <a  href="{% url 'main:contacts' %}">Contacts</a>
+                    </li>
+                <li {% if menu_item.link_name in path %}class="active"{% elif path == '/' and menu_item.link_name == 'home' %}class="active"{% endif %}>
+                        <a  href="{% url 'products:list'%}">Products</a>
+                    </li>
+                <li {% if menu_item.link_name in path %}class="active"{% elif path == '/' and menu_item.link_name == 'home' %}class="active"{% endif %}>
+                        <a  href="{% url 'categories:list' %}">Categories</a>
+                    </li>
+                <li>
+{% if not request.user.is_active %}
+                    <a href="{% url 'accounts:login' %}">Вход/Регистрация</a>
+    {% else %}
+          <a href="{% url 'accounts:logout' %}">Выход</a>
+                    {% endif %}
+ </li>
+                </nav>
+            </div>
+    </div>
+</div>
+{% block scripts %}
+    <script>
+    $.ajax()
+    </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="{% static 'server/css/base.css' %}">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'server/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'server/css/bootstrap-theme.min.css' %}">
+    <script src="{% static 'server/js/jquery-3.3.1.min.js' %}"></script>
+
+    <title>{% block title%}
+{% endblock %}</title>
+{% block page_staticfiles%}
+{% endblock %}
+</head>
+<body>
+{% include 'main/header.html' %}
+<div class="container-fluid">
+    <div class="row">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+<script src="{% static 'server/js/bootstrap.min.js' %}"></script>
+{#<script src="https://cdn.jsdelivr.net/npm/vue@2.6.6/dist/vue.js"></script>#}
+
+{% block scripts %}
+{% endblock %}
+</body>
+</html>

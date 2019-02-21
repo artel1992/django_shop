@@ -1,0 +1,77 @@
+{% extends 'server/base.html' %}
+{% block title%}
+    Главная
+{% endblock %}
+{% load static %}
+{% block page_staticfiles%}
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+{% endblock %}
+{% block content %}
+    <h3 class="col-xs-12 text text-center">Добро пожаловать{% if request.user.username != '' %}, {{ request.user.username }}{% endif %} <small>Сегодя: {% now 'd.m.Y' %}</small></h3>
+<div class="col-xs-12">
+<p class="col-xs-6">{% lorem %}</p>
+</div>
+   <div id="app">
+   <h2>[[ title ]] : [[count]]</h2>
+       <hr>
+   <button @click="riseCounter(5,' добавленно 5', $event)" class="btn btn-success">Увеличить на 5</button>
+   <button @click="riseCounter(1, ' добавленно 1', $event)" class="btn btn-success">Увеличить на 1</button>
+       <hr>
+       <hr>
+       <a href="{% url 'products:list' %}" target="_blank" @click.prevent="onHover">Products</a>
+       <a href="{% url 'products:list' %}" target="_blank" v-bind:href="url">About</a>
+   <h2 @mousemove="handleMouseMove">x:[[x]]/ y : [[y]]  <span @mousemove.stop="">Non</span></h2>
+       <hr>
+       <hr>
+       <input type="text" @keyup.enter.space="alertValue">
+   </div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.6/dist/vue.js"></script>
+    <script>
+    new Vue({
+        el:'#app',
+        delimiters: ['[[', ']]'],
+        data:{
+            count:0,
+            count2:0,
+            title:'Счетчик',
+            url:'{% url "main:about" %} ',
+            x:0,
+            y:0
+        },
+        methods:{
+            changeName: function () {
+                this.name = event.target.value
+            },
+            sayHello: function () {
+                return 'It is function'
+            },
+            riseCounter: function (num,str, event) {
+                this.count+=num;
+                this.title=str;
+                if (num ===5){
+                    event.target.style.color='blue';
+                }
+                else if (num ===1) {
+                    event.target.style.color='red';
+                }
+            },
+            onHover:function (event) {
+                event.target.style.color='red'
+            },
+            clickOnLink: function (event) {
+                event.preventDefault()
+            },
+            handleMouseMove:function (event) {
+                this.x = event.clientX
+                this.y = event.clientY
+            },
+            alertValue:function (event) {
+                alert(event.target.value)
+            }
+            
+        }
+    })
+    </script>
+{% endblock %}
