@@ -1,0 +1,25 @@
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item  {% if not page.has_previous %}disabled{% endif %}">
+      <a class="page-link" href="?page={% if page.has_previous %}{{ page.previous_page_number }}{% else %}#{% endif %}">Предыдущая</a>
+    </li>
+   {% for num in  page_range %}
+       {% if num == current_page %}
+    <li class="page-item active">
+      <span class="page-link">
+        <a href="?page={{ num }}">{{ num }}</a>
+        <span class="sr-only">(current )</span>
+      </span>
+    </li>
+           {% else %}
+            <li>
+        <a href="?page={{ num }}">{{ num }}</a>
+    </li>
+       {% endif %}
+    {% endfor %}
+
+    <li class="page-item {% if not page.has_next %}disabled{% endif %}">
+      <a class="page-link" href="?page={% if page.has_next %}{{ page.next_page_number }}{% else %}#{% endif %}">Следующая</a>
+    </li>
+  </ul>
+</nav>

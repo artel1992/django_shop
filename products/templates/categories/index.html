@@ -1,0 +1,22 @@
+{% extends 'server/base.html' %}
+{% load static %}
+{% block page_staticfiles%}
+    <link rel="stylesheet" href="{% static 'products/css/catalog.css' %}">
+{% endblock %}
+{% block title%}
+    Каталог
+{% endblock %}
+{% block content %}
+    <ul>
+        <li><a href="{% url 'categories:add_category' %}">Добавить</a></li>
+
+    </ul>
+ {% for category in categories%}
+    <h3>
+        <a href="{% url 'categories:category' pk=category.id%}">{{ category.title }}</a>
+    </h3>
+    <li><a href="{% url 'categories:delete_category' pk=category.id %}">Удалить</a></li>
+        <li><a href="{% url 'categories:edit_category'  pk=category.id %}">Редактировать</a></li>
+    {% endfor %}
+
+{% endblock %}

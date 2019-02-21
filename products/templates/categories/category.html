@@ -1,0 +1,17 @@
+{% extends 'server/base.html' %}
+{% load static %}
+{% block page_staticfiles%}
+    <link rel="stylesheet" href="{% static 'products/css/catalog.css' %}">
+{% endblock %}
+{% block title%}
+    {{ category.title }}
+{% endblock %}
+{% block content %}
+    <h3>{{ object.title }} <span class="small">{{ object.description }}</span> </h3>
+
+    {% for product in products %}
+        {% include 'server/product.html' with image=product.image name=product.name price=product.price %}
+    {% endfor %}
+<div class="col-lg-12">{% include 'server/pagination.html' with page=products page_range=products.paginator.page_range %}</div>
+
+{% endblock %}
