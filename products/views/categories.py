@@ -1,10 +1,27 @@
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from products.models import Categories, Products
+from products.models import Categories
 from products.forms import AddCategory
 from django.core.paginator import Paginator
 
-
+class RestCategoryListView(ListView):
+    model = Categories
+    def ster(self,queryset):
+        return list(map(
+            lambda itm:{
+                'id':itm.id,
+                'title':itm.title
+            },queryset
+        ))
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(RestCategoryListView,self).get_context_data(**kwargs)
+        object_list = context.get('object_list')
+        data = {}
+        data['results'] =self.ster(object_list)
+        return data
+    def render_to_response(self, context, **response_kwargs):
+        return JsonResponse(context)
 
 class CategoriesList_view(ListView):
     model = Categories
