@@ -1,5 +1,7 @@
 {% extends 'server/base.html' %}
-
+{% block title%}
+    Удалить {{ object.name }}
+{% endblock %}
 {% block content %}
     <form action="" method="post">
     {% csrf_token %}

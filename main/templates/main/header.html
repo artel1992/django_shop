@@ -20,7 +20,7 @@
                     </li>
                 <li>
 {% if not request.user.is_active %}
-                    <a href="{% url 'accounts:login' %}">Вход/Регистрация</a>
+                    <a href="{% url 'accounts:login_user' %}">Вход/Регистрация</a>
     {% else %}
           <a href="{% url 'accounts:logout' %}">Выход</a>
                     {% endif %}

@@ -1,0 +1,9 @@
+{% extends "server/base.html" %}
+{% block title%}
+    Выход
+{% endblock %}
+{% block content %}
+<p>Logged out!</p>
+
+<a href="{% url 'accounts:login_user'%}">Войти</a>
+{% endblock %}

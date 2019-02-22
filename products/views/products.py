@@ -13,7 +13,7 @@ class ProductsList_view(LoginRequiredMixin,UserPassesTestMixin,ListView):
     paginate_by = 3
     login_url = reverse_lazy('accounts:login_user')
     def test_func(self):
-        return  self.request.user.is_superuser
+        return  self.request.user.has_perm('products.view_products')
 
 
 
@@ -24,7 +24,7 @@ class ProductView_detail(LoginRequiredMixin,UserPassesTestMixin,DetailView):
     template_name = 'products/product_cart.html'
     login_url = reverse_lazy('accounts:login_user')
     def test_func(self):
-        return  self.request.user.is_superuser
+        return  self.request.user.has_perm('products.view_products')
 
 
 
@@ -35,7 +35,7 @@ class Products_create(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     template_name = 'products/add_product.html'
     login_url = reverse_lazy('accounts:login_user')
     def test_func(self):
-        return  self.request.user.has_perm('products.add_product')
+        return  self.request.user.has_perm('products.add_products')
 
 
 class Products_edit(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
