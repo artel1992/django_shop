@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'psycopg2',
     'main',
     'products',
+    'products2',
     'account'
 ]
 
@@ -85,9 +87,29 @@ WSGI_APPLICATION = 'greekbrains_django.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default': {'ENGINE': 'django.db.backends.postgresql',
+    # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'db_default',  # Or path to database file if using sqlite3. #!Базу вписывать здесь!
+        'USER': 'postgres',  # Not used with sqlite3.
+        'PASSWORD': '12345',  # Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',},
+'products': {
+        'ENGINE': 'django.db.backends.postgresql',
+    # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'db1',  # Or path to database file if using sqlite3. #!Базу вписывать здесь!
+        'USER': 'postgres',  # Not used with sqlite3.
+        'PASSWORD': '12345',  # Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',
+    },
+    'products2': {
+         'ENGINE': 'django.db.backends.postgresql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'db2',           # Or path to database file if using sqlite3. #!Базу вписывать здесь!
+        'USER': 'postgres',                        # Not used with sqlite3.
+        'PASSWORD': '12345',                       # Not used with sqlite3.
+        'HOST': '',                                # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',
     }
 }
 
@@ -138,3 +160,8 @@ STATICFILES_DIRS = [ #Кастомные файлы статики
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL="/"
+
+
+DATABASE_ROUTERS = ['products.databaseRouter.ProductsDBRouter', 'products2.databaseRouter.Products2DBRouter']
+
+
